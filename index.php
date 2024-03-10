@@ -18,6 +18,7 @@ Milestone 4 (BONUS)
 -Gestire ulteriori parametri per la password: quali caratteri usare fra numeri, lettere e simboli. Possono essere scelti singolarmente (es. solo numeri) oppure possono essere combinati fra loro (es. numeri e simboli, oppure tutti e tre insieme). 
 -Dare all’utente anche la possibilità di permettere o meno la ripetizione di caratteri uguali.
  */
+session_start();
 
 $passwordLength = $_GET['passwordLength'];
 include_once __DIR__ . '/functions.php';
@@ -25,6 +26,11 @@ include_once __DIR__ . '/functions.php';
 
 $newPassword = passwordGenerator($passwordLength);
 var_dump($newPassword);
+
+$_SESSION['newPassword'] = $newPassword;
+if (isset($_SESSION['newPassword']) && $_SESSION['newPassword'] != '') {
+    header('Location: ./results.php');
+}
 ?>
 
 <!DOCTYPE html>
